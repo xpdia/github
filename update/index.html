@@ -56,48 +56,62 @@ title: Update Your site
             var passwordInput = document.getElementById('password');
             var statusElement = document.getElementById('status');
             var spinnerElement = document.getElementById('spinner');
-
+    
             spinnerElement.style.display = 'block';
-
+    
             fetch('{{ site.url }}/access.json')
                 .then(response => response.json())
                 .then(data => {
                     var encodedUsername = data[0];
                     var encodedPassword = data[1];
-
+    
                     var decodedUsername = atob(encodedUsername);
                     var decodedPassword = atob(encodedPassword);
-
+    
                     if (usernameInput.value === decodedUsername && passwordInput.value === decodedPassword) {
                         spinnerElement.style.display = 'none';
                         statusElement.innerHTML = `
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            Authentication successful!
-                        </div>
-                        `;
-
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                Authentication successful!
+                            </div>
+                            `;
+    
                         // Trigger the rebuild request
-                        fetch('https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/fc48b31a-1a4c-4e6c-ba22-112ca94adf50', { method: 'POST' })
+                        fetch('https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/3278f5f0-0996-4657-8488-1f40eb89aa91', { method: 'POST' })
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error('Failed to trigger Jekyll site rebuild.');
                                 }
-                                // Show success message after rebuild is complete
-                                statusElement.innerHTML = `
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                Your site has been updated successfully!
-                            </div>
-                            `;
-                                // Reset form input data
-                                document.getElementById('rebuildForm').reset();
+                                // Wait for the build to complete
+                                return response.json();
+                            })
+                            .then(buildResponse => {
+                                // Check the build status in the response
+                                if (buildResponse.success) {
+                                    // Show success message after rebuild is complete
+                                    statusElement.innerHTML = `
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            Your site has been updated successfully!
+                                        </div>
+                                    `;
+                                    // Reset form input data
+                                    document.getElementById('rebuildForm').reset();
+                                } else {
+                                    // Show error message if build is not successful
+                                    statusElement.innerHTML = `
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            Failed to update your site. Build not successful.
+                                        </div>
+                                    `;
+                                }
                             })
                             .catch(error => {
                                 console.error('Error:', error);
                                 // Show error message
                                 statusElement.innerHTML = `
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    Failed to update your site, Please Try Again!
-                                </div>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        Your site has been updated successfully!
+                                    </div>
                                 `;
                             });
                     } else {
@@ -105,9 +119,9 @@ title: Update Your site
                         spinnerElement.style.display = 'none';
                         // Show error message
                         statusElement.innerHTML = `
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Username or password is incorrect.
-                        </div>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Username or password is incorrect.
+                            </div>
                         `;
                     }
                 })
@@ -117,13 +131,14 @@ title: Update Your site
                     spinnerElement.style.display = 'none';
                     // Show error message
                     statusElement.innerHTML = `
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Authentication Failed, Please Try Again!
-                    </div>
-                `;
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Authentication Failed, Please Try Again!
+                        </div>
+                    `;
                 });
         });
     </script>
+    
 </body>
 
 </html>
