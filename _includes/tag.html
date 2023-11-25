@@ -1,0 +1,16 @@
+<section class="section section-tags">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <div class="section-tags__inner">
+                    <h2 class="section-tags__title"><i class="fa-solid fa-arrow-right-long"></i> Explore our topics</h2>
+                    <div class="section-tags__box">
+                        {% for tag in site.tags %}
+                        <a href="{{ site.url }}/tag/{{ tag[0] }}" class="section-tags__name">{{ tag[0] | replace: "-", " " }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

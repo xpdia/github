@@ -1,0 +1,52 @@
+---
+layout: default
+---
+<!-- begin content -->
+<main class="content" aria-label="Content">
+    <!-- begin page -->
+    <div class="container">
+        <div class="page-head">
+            <div class="page-meta">
+                <h1 class="page-title">About Us</h1>
+                <p class="page-description">{{ site.data.main[23] }}</p>
+            </div>
+        </div>
+        <div class="page-image">
+            <img class="lazy" data-src="{{ site.data.main[24] }}" alt="About us image">
+        </div>
+        <article class="page">
+            <div class="page__content">
+                <p>{{ site.data.main[25] }}</p>
+                <h2 id="curiosity-and-creativity">{{ site.data.main[26] }}</h2>
+                <p>{{ site.data.main[27] }}</p>
+                <p><img src="{{ site.data.main[28] }}">
+                </p>
+                <p>{{ site.data.main[29] }}</p>
+                <p>{{ site.data.main[30] }}</p>
+                <div class="gallery-box">
+                    <div class="gallery">
+                        <img src="{{ site.data.main[31] }}" alt="workflow" loading="lazy" />
+                        <img src="{{ site.data.main[32] }}" alt="workflow" loading="lazy" />
+                        <img src="{{ site.data.main[33] }}" alt="workflow" loading="lazy" />
+                        <img src="{{ site.data.main[34] }}" alt="workflow" loading="lazy" />
+                        <img src="{{ site.data.main[35] }}" alt="workflow" loading="lazy" />
+                        <img src="{{ site.data.main[36] }}" alt="workflow" loading="lazy" />
+                    </div>
+                </div>
+                <p>{{ site.data.main[37] }}</p>
+                <h2 id="{{ site.data.main[38] }}">{{ site.data.main[38] }}</h2>
+                <p>{{ site.data.main[39] }}</p>
+                <blockquote>
+                    <p>{{ site.data.main[40] }}</p>
+                    <p><cite>- {{ site.data.main[41] }}</cite></p>
+                </blockquote>
+                <p>{{ site.data.main[42] }}</p>
+                <hr />
+            </div>
+        </article>
+    </div>
+    <!-- end page -->
+    <!-- begin section-gallery -->
+    {% include gallery.html %}
+    <!-- end section-gallery -->
+</main>

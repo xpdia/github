@@ -1,0 +1,43 @@
+---
+layout: job
+title: {{ data[0] }}
+date: {{ data[1] }}
+categories: {{ data[2] | join: ' ' }}
+tags: {{ data[4] | join: ' ' }}
+---
+<div class="container">
+    <div class="post-head">
+      <div class="post-meta">
+        <time class="post-date" datetime="{{ data[1] }}">{{ data[1] | date: "%d %b. %Y" }}</time>
+        <h1 class="post-title">{{ data[0] }}</h1>
+        <p class="post-description">{{ data[3] }}</p>
+      </div>
+      <div class="post-tags">
+        {% for item in data[4] %}
+        <a href="{{ site.url }}/tag/{{ item }}" class="post__tag">{{ item | replace: "-", " " }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <article class="post">
+      <div class="post__content">
+        <h2 id="iterative-design-in-action">Job Benefits</h2>
+        <ul>
+          {% for jb in data[5] %}
+          <li>{{ jb }}</li>
+          {% endfor %}
+        </ul>
+        <h2 id="iterative-design-in-action">Job Responsibilities</h2>
+        <ol>
+          {% for jr in data[6] %}
+          <li>{{ jr }}</li>
+          {% endfor %}
+        </ol>
+        <h2 id="iterative-design-in-action">Requirements</h2>
+        <ol>
+          {% for req in data[7] %}
+          <li>{{ req }}</li>
+          {% endfor %}
+        </ol>
+        <p>{{ data[8] }}</p>
+        <a href="" class="button fixed-button button--primary">Apply Now</a>
+      </div>

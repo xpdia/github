@@ -1,0 +1,29 @@
+title: ConsultEra
+email: your-email@example.com
+baseurl: ""
+url: "http://localhost:4000/"
+cdn: "https://ik.imagekit.io/consultera"
+paginate: 6
+paginate_path: "/jobs/page:num/"
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-archives
+
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+    
+layouts:
+  category: archive_taxonomy
+  tag: archive_taxonomy
+
+permalinks:
+  category: /category/:name/
+  tag: /tag/:name/
+
+collections:
+  articles:
+    output: true
+    permalink: /article/:categories/:name/

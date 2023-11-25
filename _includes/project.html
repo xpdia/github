@@ -1,0 +1,14 @@
+---
+title: Projects
+---
+
+<h1>Projects</h1>
+
+<ul>
+  {% for project in site.articles %}
+    <li>
+      <h2>{{ project.title }}</h2>
+      <!-- Add more details about the project here -->
+    </li>
+  {% endfor %}
+</ul>
